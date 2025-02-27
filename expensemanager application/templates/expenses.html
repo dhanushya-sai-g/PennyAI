@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_circle" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <title>PennyAI|Add delete view your Expenses</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='logo.png') }}" alt="PennyAI" class = navlogo onerror="this.src='/static/logo.png'"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+
+
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('expenses') }}">Expenses</a>
+
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('categories') }}">Categories</a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('subcategories') }}">Subcategories</a>
+
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('profile') }}">
+                    Profile
+                </a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="cards" style="height: fit-content;">
+        <center>
+            <h3>VIEW EXPENSE</h3>
+            <table class="table table-bordered" style="margin: 0%;">
+                <thead>
+                    <tr>
+                        <th>S.no</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Subcategory</th>
+                        <th>Date yyyy-mm-dd</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.subcategory }}</td>
+                        <td>{{ expense.date.strftime('%Y-%m-%d') if expense.date else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </center>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="cards" style="margin-top: 5px;">
+                    <center>
+                        <h3>ADD EXPENSE</h3>
+                        <form action="{{ url_for('addexpense') }}" method="post">
+                            <input type="text"  name="category" id="category" placeholder="category">
+                            <input type="text"  name="subcategory" id="subcategory" placeholder="subcategory">
+                            <input type="text" name="amount" id="amount" placeholder="amount">
+                            <button type="submit" class="button">Add!</button>
+                        </form>
+                    </center>
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="cards"  style="margin-top: 5px;">
+                    <center>
+                        <h3>DELETE EXPENSE</h3>
+                        <form action="{{ url_for('deleteexpense') }}" method="POST">
+                            <input type="text"  name="category" id="category" placeholder="category">
+                            <input type="text"  name="subcategory" id="subcategory" placeholder="subcategory">
+                            <input type="text" name="amount" id="amount" placeholder="amount"><br>
+                            <input type="date" name="date" id="date">
+                            <button type="submit" class="button">Delete!</button>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>

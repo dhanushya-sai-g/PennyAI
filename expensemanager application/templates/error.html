@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PennyAI|OOPS! An error occoured</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/x-icon">
+</head>
+<body>
+    <h1>OOPS! SOMETHING WENT WRONG</h1>
+    <h3>It could be one of the following reasons:</h3>
+    <ul>
+        <li>You have entered an invalid OTP</li>
+        <li>You have entered an invalid email</li>
+        <li>You have entered an invalid password</li>
+        <li>You tried to access the dashboard without logging in</li>
+        <li>You tried to access an invalid page</li>
+    </ul>
+    <h3>Please try again</h3>
+    <a href="{{url_for('authentication')}}">Login</a>
+</body>
+</html>
